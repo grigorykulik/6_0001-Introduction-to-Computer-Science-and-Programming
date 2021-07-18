@@ -44,9 +44,9 @@ public class Main {
         String result = "";
 
         char[] array = s.toCharArray();
-        int i = 0, j = 1, sizeCounter = 0;
+        int i = 0, j = 1;
 
-        Map<String, Integer> map = new HashMap<>();
+        ArrayList<String> al = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
 
         if (s.length() == 1) {
@@ -58,26 +58,22 @@ public class Main {
             String firstChar = String.valueOf(array[i]);
             String secondChar = String.valueOf(array[j]);
 
-            System.out.println(firstChar.compareTo(secondChar));
-
             if (firstChar.compareTo(secondChar) > 0) {
                 i++;
                 j++;
 
                 if (!sb.toString().equals("")) {
-                    map.put(sb.toString(), sizeCounter);
+                    al.add(sb.toString());
                 }
 
                 sb.delete(0, sb.length());
             } else {
                 if (sb.length() == 0) {
-                    sizeCounter = 2;
                     sb.append(array[i]);
                     sb.append(array[j]);
                     i++;
                     j++;
                 } else {
-                    sizeCounter++;
                     sb.append(array[j]);
                     i++;
                     j++;
@@ -85,20 +81,18 @@ public class Main {
             }
         }
 
-        if (sb.length() > 0 && map.size() == 0) {
-            map.put(sb.toString(), sizeCounter);
+        if (sb.length() > 0 || al.size() == 0) {
+            al.add(sb.toString());
         }
 
-        Optional<Map.Entry<String, Integer>> maxEntry = map
-                .entrySet()
-                .stream()
-                .max(Comparator.comparing(Map.Entry::getValue));
+        if (al.size() > 0) {
+            result = al.get(al.size() - 1);
 
-        try {
-            result = maxEntry.get().getKey();
-        } catch (NoSuchElementException e) {
-            System.out.println("There are no characters " +
-                    "in the string that follow one another alphabetically");
+            for (int k = al.size() - 2; k >= 0; k--) {
+                if (al.get(k).length() >= result.length()) {
+                    result = al.get(k);
+                }
+            }
         }
 
         return result;
