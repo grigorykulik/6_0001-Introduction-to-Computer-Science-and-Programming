@@ -5,7 +5,7 @@ This repository contains problem solution and algorithm implementations from the
 ## The contents of this repository are as follows:
 ### 1. examples_implementation_in_java
 square_root: an alorithm for finding the squre root of the given number with the given precision.
-bisection_search_cube_root: finding a cube root of a number using the bisection algorithm
+bisection_search_cube_root: finding a cube root of a number using the bisection algorithm.
 multiplication_via_recursion: a recursive approach to multiplying two numbers
 recursive_factorial: a recursive algorithm for finding the factorial of a given number.
 
